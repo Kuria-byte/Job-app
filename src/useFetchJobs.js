@@ -7,7 +7,7 @@ const ACTIONS = {
   ERROR: 'error',
   UPDATE_HAS_NEXT_PAGE: 'update-has-next-page'
 }
-
+//tO GET AROUND CORS , WE USE THE HEROKU ANYWHERE AS A PROXY SERVER
 const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json'
 
 function reducer(state, action) {
@@ -31,6 +31,7 @@ export default function useFetchJobs(params, page) {
   useEffect(() => {
     const cancelToken1 = axios.CancelToken.source()
     dispatch({ type: ACTIONS.MAKE_REQUEST })
+
     axios.get(BASE_URL, {
       cancelToken: cancelToken1.token,
       params: { markdown: true, page: page, ...params }
